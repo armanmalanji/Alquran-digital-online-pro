@@ -1,5 +1,5 @@
-const CACHE_NAME = 'quran-pwa-cache-v3'; // Versi dinaikkan
-const DYNAMIC_CACHE = 'quran-dynamic-data-v2';
+const CACHE_NAME = 'quran-pwa-cache-v4'; // Versi dinaikkan agar HP otomatis update
+const DYNAMIC_CACHE = 'quran-dynamic-data-v3';
 
 // Aset statis kerangka aplikasi
 const urlsToCache = [
@@ -35,21 +35,22 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// Ambil dari cache jika offline, jika tidak ada ambil dari jaringan
+// Strategi Fetch
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // === PENCEGAHAN CACHE AUDIO ===
-  // Jika request adalah file audio (.mp3), dari everyayah.com, atau dikenali browser sebagai audio
-  // Biarkan mengambil langsung dari internet dan jangan simpan di cache
-  if (url.origin.includes('everyayah.com') || url.pathname.endsWith('.mp3') || event.request.destination === 'audio') {
+  // 1. BYPASS AUDIO & API AL-QURAN (Karena sudah diurus IndexedDB)
+  // Jangan simpan file MP3 dan jangan double-simpan data teks api.quran.com
+  if (url.origin.includes('everyayah.com') || 
+      url.pathname.endsWith('.mp3') || 
+      event.request.destination === 'audio' ||
+      url.pathname.includes('/api/v4/verses/by_page')) { 
     event.respondWith(fetch(event.request));
-    return; // Hentikan eksekusi di sini agar tidak masuk ke logika cache di bawah
+    return;
   }
 
-  // 1. Tangani request ke API teks, CDN Font, Tafsir, dan Gambar Mushaf
-  const isApiOrCdn = url.origin.includes('api.quran.com') || 
-                     url.origin.includes('equran.id') || 
+  // 2. TANGANI TAFSIR, FONT, DAN GAMBAR MUSHAF
+  const isApiOrCdn = url.origin.includes('equran.id') || 
                      url.origin.includes('qurancdn.com') || 
                      url.origin.includes('jsdelivr.net') ||
                      url.origin.includes('fonts.googleapis.com') ||
@@ -60,7 +61,6 @@ self.addEventListener('fetch', event => {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          // Jangan cache jika respons gagal atau tidak valid
           if(!response || response.status !== 200 || response.type !== 'basic' && response.type !== 'cors') {
             return response;
           }
@@ -71,19 +71,17 @@ self.addEventListener('fetch', event => {
           return response;
         })
         .catch(() => {
-          // Jika offline, cari di Dynamic Cache
           return caches.match(event.request);
         })
     );
   } else {
-    // 2. Tangani file lokal (index.html, icon, manifest)
+    // 3. TANGANI FILE LOKAL (index.html dll)
     event.respondWith(
       caches.match(event.request)
         .then(response => {
           if (response) return response; 
           
           return fetch(event.request).then(fetchRes => {
-            // Pastikan URL valid (http/https) sebelum dicache (mencegah error dari ekstensi browser)
             if(!event.request.url.startsWith('http')) return fetchRes;
 
             return caches.open(DYNAMIC_CACHE).then(cache => {
