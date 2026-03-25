@@ -66,7 +66,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 
 /* SURAH BANNER */
 .surah-banner{text-align:center;padding:30px 15px;margin:0 0 5px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:var(--radius);color:#fff;position:relative;overflow:hidden}
-.surah-banner::before{display:none;} /* Splash Bismillah dihilangkan */
+.surah-banner::before{display:none;}
 .surah-banner h2{font-family:'Amiri',serif;font-size:32px;margin-bottom:6px;text-shadow:0 2px 4px rgba(0,0,0,.3)}
 .surah-banner .surah-meta{font-size:12px;opacity:.85;font-weight:600}
 .surah-banner .surah-number-badge{display:inline-block;background:var(--gold);color:var(--primary-dark);padding:3px 14px;border-radius:15px;font-weight:800;font-size:11px;margin-top:8px}
@@ -158,10 +158,7 @@ body.hide-translation .home-screen { display: block; direction: ltr; text-align:
 80% { transform: scale(3.2) translateY(2px); text-shadow: 0px 6px 6px rgba(0,0,0,0.6), 0px -1px 2px rgba(255,255,255,0.8); color: #fff; }
 100% { transform: scale(1); text-shadow: none; }
 }
-.juz-pop {
-display: inline-block;
-animation: pulse3DJuz 2.5s ease-in-out;
-}
+.juz-pop { display: inline-block; animation: pulse3DJuz 2.5s ease-in-out; }
 
 /* AUDIO BAR */
 .audio-player-bar{position:fixed;bottom:60px;left:0;right:0;background:linear-gradient(135deg,rgba(26,77,46,.95),rgba(15,53,32,.95));color:#fff;padding:8px 12px;z-index:1999;transform:translateY(300%);transition:transform .35s;box-shadow:0 -2px 15px rgba(0,0,0,.3);display:flex;align-items:center;gap:8px;border-top:1.5px solid var(--gold);backdrop-filter:blur(10px)}
@@ -197,7 +194,7 @@ animation: pulse3DJuz 2.5s ease-in-out;
 .scroll-status-pill{position:fixed;bottom:70px;right:12px;background:rgba(0,0,0,.45);color:#fff;padding:4px 12px;border-radius:15px;font-size:10px;font-weight:800;z-index:1800;pointer-events:none;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.15);opacity:0;transition:.3s}
 .scroll-status-pill.show{opacity:1}
 
-/* OVERLAY & SETTINGS - FIXED SCROLL BUG */
+/* OVERLAY & SETTINGS */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:3999;opacity:0;visibility:hidden;transition:.3s;backdrop-filter:blur(3px)}
 .overlay.active{opacity:1;visibility:visible}
 .settings-panel{position:fixed;bottom:-100%;left:0;right:0;background:var(--card);color:var(--text);padding:0 20px 30px;border-radius:24px 24px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.25);transition:bottom .4s cubic-bezier(.4,0,.2,1);z-index:4000;max-height:85vh;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
@@ -233,7 +230,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;hei
 .btn-save{width:100%;padding:14px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border:none;border-radius:var(--radius);font-weight:800;font-size:14px;margin-top:15px;cursor:pointer}
 .btn-save:active{transform:scale(.98)}
 
-/* UI PENCARIAN WHEEL PICKER - FIXED SCROLL BUG */
+/* UI PENCARIAN WHEEL PICKER */
 .picker-container { display: flex; height: 180px; position: relative; border: 1.5px solid rgba(39,174,96,.25); border-radius: 12px; background: var(--card); overflow: hidden;}
 .picker-col { overflow-y: scroll; scroll-snap-type: y mandatory; scrollbar-width: none; padding: 70px 0; font-weight: 600; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch; }
 .picker-col::-webkit-scrollbar { display: none; }
@@ -266,7 +263,7 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;hei
 .credit{text-align:center;padding:30px 15px 20px;font-size:12px;opacity:.5;line-height:1.6}
 .credit b{color:var(--accent);font-size:14px;opacity:1}
 
-/* TAFSIR & SEARCH UI - FIXED SCROLL BUG */
+/* TAFSIR & SEARCH UI */
 #tafsirContent, #searchResult { font-size:14px; line-height:1.6; max-height: 60vh; overflow-y:auto; padding-right:5px; margin-bottom: 10px; overscroll-behavior-y: contain; -webkit-overflow-scrolling: touch;}
 .search-input { width:100%; padding:12px; border:2px solid var(--accent); border-radius:10px; font-weight:700; background:var(--card); color:var(--text); margin-bottom:10px; outline:none;}
 .search-item { background:rgba(39,174,96,.05); border-left:3px solid var(--accent); padding:10px; margin-bottom:8px; border-radius:8px; cursor:pointer;}
@@ -390,20 +387,16 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;hei
 
 <button class="btn-save" style="background:rgba(231, 76, 60, 0.1); color:var(--danger); margin-top:0;" onclick="closeBmModal()">✕ BATAL</button>
 </div>
+
 <div class="overlay" id="settingsOverlay" onclick="toggleSettings()"></div>
 <div id="settingsPanel" class="settings-panel">
 <div class="settings-handle"></div>
 <div class="settings-title">⚙️ PENGATURAN</div>
 
 <div class="setting-group">
-<label class="setting-label">🎵 Pemutar Audio Kustom (G-Drive / MP3)</label>
-<div style="font-size:11px; opacity:0.8; margin-bottom:8px;">Tempel link MP3 (misal file Takbiran dari Google Drive) untuk diputar sebagai latar belakang saat membaca.</div>
-<input type="text" id="customAudioUrl" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(39,174,96,.25);background:var(--card);color:var(--text);margin-bottom:8px;outline:none;" placeholder="https://link-mp3-anda.com/audio.mp3">
-<div style="display:flex;gap:10px;">
-<button class="abtn" style="flex:1" onclick="playCustomBackgroundAudio()">▶ Putar Audio</button>
-<button class="abtn" style="flex:1; color:var(--danger); border-color:rgba(231,76,60,.2); background:rgba(231,76,60,.1);" onclick="stopCustomBackgroundAudio()">⏹ Hentikan</button>
-</div>
-<audio id="bgCustomAudio" loop preload="none"></audio>
+<label class="setting-label">📥 Database Offline (Teks & Terjemahan)</label>
+<div style="font-size:11px; opacity:0.8; margin-bottom:8px;">Unduh seluruh 604 halaman agar aplikasi bisa digunakan 100% tanpa internet. Pastikan layar HP tetap menyala selama proses.</div>
+<button class="abtn" id="btnDownloadOffline" style="width:100%; justify-content:center;" onclick="downloadAllPages()">⬇️ Unduh Semua Data Al-Qur'an</button>
 </div>
 
 <div class="setting-group">
@@ -414,6 +407,17 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;hei
 <button class="abtn" style="flex:1" onclick="document.getElementById('importFile').click()">⬆️ Import (Restore)</button>
 <input type="file" id="importFile" style="display:none" accept=".json" onchange="importData(event)">
 </div>
+</div>
+
+<div class="setting-group">
+<label class="setting-label">🎵 Pemutar Audio Kustom (G-Drive / MP3)</label>
+<div style="font-size:11px; opacity:0.8; margin-bottom:8px;">Tempel link MP3 (misal file Takbiran dari Google Drive) untuk diputar sebagai latar belakang saat membaca.</div>
+<input type="text" id="customAudioUrl" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(39,174,96,.25);background:var(--card);color:var(--text);margin-bottom:8px;outline:none;" placeholder="https://link-mp3-anda.com/audio.mp3">
+<div style="display:flex;gap:10px;">
+<button class="abtn" style="flex:1" onclick="playCustomBackgroundAudio()">▶ Putar Audio</button>
+<button class="abtn" style="flex:1; color:var(--danger); border-color:rgba(231,76,60,.2); background:rgba(231,76,60,.1);" onclick="stopCustomBackgroundAudio()">⏹ Hentikan</button>
+</div>
+<audio id="bgCustomAudio" loop preload="none"></audio>
 </div>
 
 <div class="setting-group">
@@ -491,10 +495,74 @@ let isModeCetak=false;
 let isGoldenMode=false;
 
 let lastReadData = JSON.parse(localStorage.getItem('last_read_v2')) || { page: 1, key: null };
-
 const audio=document.getElementById('mainAudio');
 const juzPages=[1,22,42,62,82,102,122,142,162,182,202,222,242,262,282,302,322,342,362,382,402,422,442,462,482,502,522,542,562,582];
 const surahStartPage = [0, 1, 2, 50, 77, 106, 128, 151, 177, 187, 208, 221, 235, 249, 255, 262, 267, 282, 293, 305, 312, 322, 332, 342, 350, 359, 367, 377, 385, 396, 404, 411, 415, 418, 428, 434, 440, 446, 453, 458, 467, 477, 483, 489, 496, 499, 502, 507, 511, 515, 518, 520, 523, 526, 528, 531, 534, 537, 542, 545, 549, 551, 553, 554, 556, 558, 560, 562, 564, 566, 568, 570, 572, 574, 575, 577, 578, 580, 582, 583, 585, 586, 587, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 598, 599, 600, 600, 601, 601, 602, 602, 603, 603, 604, 604, 604, 604, 604, 604, 604, 604, 604, 604, 604, 604];
+
+// === SISTEM DATABASE OFFLINE (INDEXED DB) ===
+const dbName = "QuranOfflineDB";
+const storeName = "pages";
+let db;
+
+function initDB() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open(dbName, 1);
+        request.onupgradeneeded = (e) => {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains(storeName)) db.createObjectStore(storeName, { keyPath: "page" });
+        };
+        request.onsuccess = (e) => { db = e.target.result; resolve(); };
+        request.onerror = (e) => { console.error("IndexedDB error", e); reject(e); };
+    });
+}
+
+function savePageToDB(page, data) {
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, "readwrite");
+        tx.objectStore(storeName).put({ page: page, data: data });
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject();
+    });
+}
+
+function getPageFromDB(page) {
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(storeName, "readonly");
+        const request = tx.objectStore(storeName).get(page);
+        request.onsuccess = () => resolve(request.result ? request.result.data : null);
+        request.onerror = () => reject();
+    });
+}
+
+async function downloadAllPages() {
+    const btn = document.getElementById('btnDownloadOffline');
+    btn.disabled = true;
+    if(!db) await initDB();
+    
+    let dlWakeLock = null;
+    try { dlWakeLock = await navigator.wakeLock.request('screen'); } catch(e){}
+
+    for (let p = 1; p <= 604; p++) {
+        btn.innerHTML = `⏳ Mengunduh... Hal ${p} / 604`;
+        try {
+            let existing = await getPageFromDB(p);
+            if (!existing) {
+                let res = await fetch(`https://api.quran.com/api/v4/verses/by_page/${p}?language=id&translations=33&fields=text_uthmani,chapter_id,verse_number`);
+                let data = await res.json();
+                await savePageToDB(p, data);
+                await new Promise(r => setTimeout(r, 200)); 
+            }
+        } catch (e) {
+            console.log('Gagal hal', p);
+            p--; // Ulangi halaman yang gagal
+            await new Promise(r => setTimeout(r, 2000));
+        }
+    }
+    if(dlWakeLock) dlWakeLock.release();
+    btn.innerHTML = `✅ Data Offline Siap (100%)`;
+    btn.style.color = 'var(--accent)';
+    showToast("Semua teks & terjemahan berhasil diunduh!");
+}
 
 // WAKE LOCK
 async function requestWakeLock(){if(!wakeLockEnabled)return;if('wakeLock' in navigator){try{wakeLockSentinel=await navigator.wakeLock.request('screen');wakeLockSentinel.addEventListener('release',()=>{document.addEventListener('visibilitychange',reacquireWL,{once:true})});showWLBadge(true);return}catch(e){}}try{const c=document.createElement('canvas');c.width=2;c.height=2;c.getContext('2d').fillRect(0,0,2,2);const v=document.createElement('video');v.muted=true;v.playsInline=true;v.loop=true;v.style.cssText='position:fixed;width:1px;height:1px;opacity:.01;pointer-events:none;top:-1px;left:-1px';try{v.srcObject=c.captureStream(1)}catch(e){}document.body.appendChild(v);v.play().catch(()=>{});v._wl=true;showWLBadge(true)}catch(e){}}
@@ -669,7 +737,9 @@ bar.style.right = 'auto';
 }
 
 window.onload=async()=>{
-await fetchSurahs();loadSettings();loadBookmarks();
+await initDB();
+await fetchSurahs();
+loadSettings();loadBookmarks();
 const savedSpeed = localStorage.getItem('quran_scroll_speed');
 if (savedSpeed !== null) {
 scrollSpeed = parseInt(savedSpeed);
@@ -758,9 +828,19 @@ audio.addEventListener('pause',()=>{document.getElementById('btnPlayPause').text
 }
 
 async function fetchSurahs(){
-try{const r=await fetch('https://api.quran.com/api/v4/chapters?language=id');
-const d=await r.json();allSurahs=d.chapters;}
-catch(e){showToast('⚠️ Gagal memuat surat')}
+    const savedSurahs = localStorage.getItem('quran_surahs_offline');
+    if (savedSurahs) {
+        allSurahs = JSON.parse(savedSurahs);
+        return; 
+    }
+    try {
+        const r = await fetch('https://api.quran.com/api/v4/chapters?language=id');
+        const d = await r.json();
+        allSurahs = d.chapters;
+        localStorage.setItem('quran_surahs_offline', JSON.stringify(allSurahs));
+    } catch(e) {
+        showToast('⚠️ Gagal memuat daftar surat. Pastikan ada koneksi internet.');
+    }
 }
 
 let isSyncing = false;
@@ -943,106 +1023,114 @@ resetAndLoadPage(currentPage);
 }
 
 async function loadContent(p,isReset){
-const c=document.getElementById('quran-container');
-if(isReset){c.innerHTML='';for(let i=0;i<3;i++)c.innerHTML+='<div class="skeleton skeleton-ayat"></div>'}
-try{
-const r=await fetch(`https://api.quran.com/api/v4/verses/by_page/${p}?language=id&translations=33&fields=text_uthmani,chapter_id,verse_number`);
-const d=await r.json();if(isReset)c.innerHTML='';
+    const c=document.getElementById('quran-container');
+    if(isReset){c.innerHTML='';for(let i=0;i<3;i++)c.innerHTML+='<div class="skeleton skeleton-ayat"></div>'}
+    try{
+        
+        if(!db) await initDB();
+        let d = await getPageFromDB(p); 
+        
+        if(!d) {
+            const r = await fetch(`https://api.quran.com/api/v4/verses/by_page/${p}?language=id&translations=33&fields=text_uthmani,chapter_id,verse_number`);
+            d = await r.json();
+            await savePageToDB(p, d); 
+        }
 
-if(!isReset){const sep=document.createElement('div');sep.className='page-separator';sep.innerHTML=`<span class="page-sep-badge">📄 Hal ${p} — Juz ${getJuzFromPage(p)}</span>`;c.appendChild(sep)}
+        if(isReset)c.innerHTML='';
 
-if (isModeCetak) {
-const pageStr = String(p).padStart(3, '0');
-const imgWrap = document.createElement('div');
-imgWrap.style.textAlign = 'center';
-imgWrap.style.marginBottom = '20px';
-imgWrap.innerHTML = `<img src="https://android.quran.com/data/width_1024/page${pageStr}.png" class="mushaf-image" alt="Halaman ${p}">`;
-const invisBlock = document.createElement('div');
-invisBlock.className = 'ayat-block';
-invisBlock.dataset.page = p;
-if(d.verses.length > 0) {
-const sName = getSurahName(d.verses[0].chapter_id);
-invisBlock.dataset.key = d.verses[0].verse_key;
-invisBlock.dataset.surahName = sName;
-d.verses.forEach(v => {
-pageVerses.push({key:v.verse_key,chapter_id:v.chapter_id,verse_number:v.verse_number,page:p,surahName:getSurahName(v.chapter_id)});
-});
-}
-c.appendChild(imgWrap);
-c.appendChild(invisBlock);
-if(isReset){const cr=document.createElement('div');cr.className='credit';cr.innerHTML='<b>by Abu Zaid</b><br>Al-Qur\'an Digital';c.appendChild(cr)}
-if(d.verses.length>0){const fn=getSurahName(d.verses[0].chapter_id);if(fn)document.getElementById('currentSurahLabel').textContent=fn}
-updateVisInfo();
-return;
-}
+        if(!isReset){const sep=document.createElement('div');sep.className='page-separator';sep.innerHTML=`<span class="page-sep-badge">📄 Hal ${p} — Juz ${getJuzFromPage(p)}</span>`;c.appendChild(sep)}
 
-d.verses.forEach(v=>{
-const sName=getSurahName(v.chapter_id),sInfo=getSurahInfo(v.chapter_id);
-if(v.verse_number===1&&v.chapter_id!==lastRenderedChapterId){
-if(sInfo){
-const banner=document.createElement('div');banner.className='surah-banner';
-const rev=sInfo.revelation_place==='makkah'?'Makkiyah':'Madaniyah';
-banner.innerHTML=`<h2>${sInfo.name_arabic||sInfo.name_simple}</h2><div class="surah-meta">${sInfo.name_simple} • ${sInfo.translated_name?.name||''} • ${sInfo.verses_count} Ayat • ${rev}</div><div class="surah-number-badge">Surah ke-${sInfo.id}</div>`;
-c.appendChild(banner);
-if(v.chapter_id!==1&&v.chapter_id!==9){const b=document.createElement('div');b.className='bismillah-text';b.textContent='بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ';c.appendChild(b)}
-}
-}
-lastRenderedChapterId=v.chapter_id;
+        if (isModeCetak) {
+            const pageStr = String(p).padStart(3, '0');
+            const imgWrap = document.createElement('div');
+            imgWrap.style.textAlign = 'center';
+            imgWrap.style.marginBottom = '20px';
+            imgWrap.innerHTML = `<img src="https://android.quran.com/data/width_1024/page${pageStr}.png" class="mushaf-image" alt="Halaman ${p}">`;
+            const invisBlock = document.createElement('div');
+            invisBlock.className = 'ayat-block';
+            invisBlock.dataset.page = p;
+            if(d.verses.length > 0) {
+                const sName = getSurahName(d.verses[0].chapter_id);
+                invisBlock.dataset.key = d.verses[0].verse_key;
+                invisBlock.dataset.surahName = sName;
+                d.verses.forEach(v => {
+                    pageVerses.push({key:v.verse_key,chapter_id:v.chapter_id,verse_number:v.verse_number,page:p,surahName:getSurahName(v.chapter_id)});
+                });
+            }
+            c.appendChild(imgWrap);
+            c.appendChild(invisBlock);
+            if(isReset){const cr=document.createElement('div');cr.className='credit';cr.innerHTML='<b>by Abu Zaid</b><br>Al-Qur\'an Digital';c.appendChild(cr)}
+            if(d.verses.length>0){const fn=getSurahName(d.verses[0].chapter_id);if(fn)document.getElementById('currentSurahLabel').textContent=fn}
+            updateVisInfo();
+            return;
+        }
 
-const key=v.verse_key,kid=key.replace(':','-');
-const isBm=bookmarks.some(b=>b.key===key);
-const isLastRead=lastReadData.key===key;
-const safeSName = sName.replace(/'/g, "\\'");
-pageVerses.push({key,chapter_id:v.chapter_id,verse_number:v.verse_number,page:p,surahName:sName});
+        d.verses.forEach(v=>{
+            const sName=getSurahName(v.chapter_id),sInfo=getSurahInfo(v.chapter_id);
+            if(v.verse_number===1&&v.chapter_id!==lastRenderedChapterId){
+                if(sInfo){
+                    const banner=document.createElement('div');banner.className='surah-banner';
+                    const rev=sInfo.revelation_place==='makkah'?'Makkiyah':'Madaniyah';
+                    banner.innerHTML=`<h2>${sInfo.name_arabic||sInfo.name_simple}</h2><div class="surah-meta">${sInfo.name_simple} • ${sInfo.translated_name?.name||''} • ${sInfo.verses_count} Ayat • ${rev}</div><div class="surah-number-badge">Surah ke-${sInfo.id}</div>`;
+                    c.appendChild(banner);
+                    if(v.chapter_id!==1&&v.chapter_id!==9){const b=document.createElement('div');b.className='bismillah-text';b.textContent='بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ';c.appendChild(b)}
+                }
+            }
+            lastRenderedChapterId=v.chapter_id;
 
-let trans=v.translations&&v.translations[0]?v.translations[0].text:'';trans=trans.replace(/<[^>]*>/g,'');
+            const key=v.verse_key,kid=key.replace(':','-');
+            const isBm=bookmarks.some(b=>b.key===key);
+            const isLastRead=lastReadData.key===key;
+            const safeSName = sName.replace(/'/g, "\\'");
+            pageVerses.push({key,chapter_id:v.chapter_id,verse_number:v.verse_number,page:p,surahName:sName});
 
-// PEMBERSIHAN KHUSUS UNTUK FONT MADINAH LAMA (KFGQPC LAMA)
-const cleanArabicText = v.text_uthmani
-.replace(/◌/g, '') // Hapus placeholder literal
-.replace(/\u25CC/g, '') // Hapus Dotted Circle
-.replace(/[\u06DF\u06E0]/g, '') // Hapus Sifr Mustadir/Mustatil
-.replace(/\u08F0/g, '\u064B') // Ubah Fathatan terbuka
-.replace(/\u08F1/g, '\u064C') // Ubah Dammatan terbuka
-.replace(/\u08F2/g, '\u064D') // Ubah Kasratan terbuka
-.replace(/\u08F3/g, '\u06E2') // Ubah Mim Iqlab
-.replace(/\u06ED/g, ''); // Hapus Mim Iqlab Bawah (penyebab lingkaran)
+            let trans=v.translations&&v.translations[0]?v.translations[0].text:'';trans=trans.replace(/<[^>]*>/g,'');
 
-const block=document.createElement('div');
-block.className='ayat-block'+(isBm?' bookmarked':'')+(isLastRead?' last-read-ayat':'');
-block.id=`ayat-${kid}`;block.dataset.key=key;block.dataset.page=p;block.dataset.surahName=sName;
+            const cleanArabicText = v.text_uthmani
+            .replace(/◌/g, '') 
+            .replace(/\u25CC/g, '') 
+            .replace(/[\u06DF\u06E0]/g, '') 
+            .replace(/\u08F0/g, '\u064B') 
+            .replace(/\u08F1/g, '\u064C') 
+            .replace(/\u08F2/g, '\u064D') 
+            .replace(/\u08F3/g, '\u06E2') 
+            .replace(/\u06ED/g, ''); 
 
-block.onclick = (e) => {
-if(e.target.closest('.ayat-num') || e.target.closest('.ayat-action-bar') || e.target.closest('.trans-badge') || e.target.closest('.abtn')) return;
-document.querySelectorAll('.ayat-block').forEach(b => b.classList.remove('selected-ayat'));
-block.classList.add('selected-ayat');
-tempSelectedAyat = { key, surahName: sName, ayat: v.verse_number, page: p, element: block };
-};
+            const block=document.createElement('div');
+            block.className='ayat-block'+(isBm?' bookmarked':'')+(isLastRead?' last-read-ayat':'');
+            block.id=`ayat-${kid}`;block.dataset.key=key;block.dataset.page=p;block.dataset.surahName=sName;
 
-block.innerHTML=`
-<div class="arabic-flow">
-<span class="arabic-text-inline">${cleanArabicText}</span><span class="ayat-num" id="num-${kid}" onclick="event.stopPropagation(); toggleActionBar('${key}', event)">${v.verse_number}</span>
-</div>
-<div class="ayat-trans">
-<div class="trans-badge" onclick="event.stopPropagation(); toggleActionBar('${key}', event)">⚙️ ${sName} Ayat ${v.verse_number} ▼</div>
-<div style="margin-top:8px">${trans}</div>
-</div>
-<div class="ayat-action-bar" id="actions-${kid}" onclick="event.stopPropagation()">
-<button class="abtn" onclick="markAsLastRead(null, '${key}', '${safeSName}', ${v.verse_number}, ${p}, document.getElementById('ayat-${kid}')); toggleActionBar('${key}', null)">📌 Simpan Terakhir Dibaca</button>
-<button class="abtn" onclick="openTafsir('${key}'); toggleActionBar('${key}', null)">📖 Baca Tafsir Kemenag</button>
-<button class="abtn" onclick="playAyat('${key}'); toggleActionBar('${key}', null)">▶ Putar Audio</button>
-<button class="abtn abtn-pause" onclick="pauseAudio(); toggleActionBar('${key}', null)">⏸ Pause Audio</button>
-<button class="abtn" onclick="toggleBookmark('${key}','${safeSName}',${v.verse_number},${p}); toggleActionBar('${key}', null)">🔖 ${isBm?'Hapus':'Simpan'} Bookmark</button>
-<button class="abtn" onclick="copyAyat(this); toggleActionBar('${key}', null)" data-arabic="${encodeURIComponent(cleanArabicText)}" data-trans="${encodeURIComponent(trans)}" data-key="${key}">📋 Salin Ayat</button>
-</div>`;
-c.appendChild(block);
-});
+            block.onclick = (e) => {
+                if(e.target.closest('.ayat-num') || e.target.closest('.ayat-action-bar') || e.target.closest('.trans-badge') || e.target.closest('.abtn')) return;
+                document.querySelectorAll('.ayat-block').forEach(b => b.classList.remove('selected-ayat'));
+                block.classList.add('selected-ayat');
+                tempSelectedAyat = { key, surahName: sName, ayat: v.verse_number, page: p, element: block };
+            };
 
-if(isReset){const cr=document.createElement('div');cr.className='credit';cr.innerHTML='<b>by Abu Zaid</b><br>Al-Qur\'an Digital';c.appendChild(cr)}
-applyStyles();
-if(d.verses.length>0){const fn=getSurahName(d.verses[0].chapter_id);if(fn)document.getElementById('currentSurahLabel').textContent=fn}
-updateVisInfo();
-}catch(e){if(isReset)c.innerHTML='<div style="text-align:center;padding:40px;color:var(--danger)">⚠️ Gagal memuat</div>';showToast('⚠️ Gagal')}
+            block.innerHTML=`
+            <div class="arabic-flow">
+            <span class="arabic-text-inline">${cleanArabicText}</span><span class="ayat-num" id="num-${kid}" onclick="event.stopPropagation(); toggleActionBar('${key}', event)">${v.verse_number}</span>
+            </div>
+            <div class="ayat-trans">
+            <div class="trans-badge" onclick="event.stopPropagation(); toggleActionBar('${key}', event)">⚙️ ${sName} Ayat ${v.verse_number} ▼</div>
+            <div style="margin-top:8px">${trans}</div>
+            </div>
+            <div class="ayat-action-bar" id="actions-${kid}" onclick="event.stopPropagation()">
+            <button class="abtn" onclick="markAsLastRead(null, '${key}', '${safeSName}', ${v.verse_number}, ${p}, document.getElementById('ayat-${kid}')); toggleActionBar('${key}', null)">📌 Simpan Terakhir Dibaca</button>
+            <button class="abtn" onclick="openTafsir('${key}'); toggleActionBar('${key}', null)">📖 Baca Tafsir Kemenag</button>
+            <button class="abtn" onclick="playAyat('${key}'); toggleActionBar('${key}', null)">▶ Putar Audio</button>
+            <button class="abtn abtn-pause" onclick="pauseAudio(); toggleActionBar('${key}', null)">⏸ Pause Audio</button>
+            <button class="abtn" onclick="toggleBookmark('${key}','${safeSName}',${v.verse_number},${p}); toggleActionBar('${key}', null)">🔖 ${isBm?'Hapus':'Simpan'} Bookmark</button>
+            <button class="abtn" onclick="copyAyat(this); toggleActionBar('${key}', null)" data-arabic="${encodeURIComponent(cleanArabicText)}" data-trans="${encodeURIComponent(trans)}" data-key="${key}">📋 Salin Ayat</button>
+            </div>`;
+            c.appendChild(block);
+        });
+
+        if(isReset){const cr=document.createElement('div');cr.className='credit';cr.innerHTML='<b>by Abu Zaid</b><br>Al-Qur\'an Digital';c.appendChild(cr)}
+        applyStyles();
+        if(d.verses.length>0){const fn=getSurahName(d.verses[0].chapter_id);if(fn)document.getElementById('currentSurahLabel').textContent=fn}
+        updateVisInfo();
+    }catch(e){if(isReset)c.innerHTML='<div style="text-align:center;padding:40px;color:var(--danger)">⚠️ Gagal memuat</div>';showToast('⚠️ Gagal')}
 }
 
 async function resumeLastRead(){
@@ -1051,7 +1139,7 @@ await resetAndLoadPage(p);
 if(lastReadData.key && !isModeCetak){setTimeout(()=>{const el=document.getElementById(`ayat-${lastReadData.key.replace(':','-')}`);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.classList.add('last-read-ayat');}},1000);}
 }
 
-// FUNGSI TAFSIR KEMENAG (EQURAN API) - FIXED SCROLL BUG
+// FUNGSI TAFSIR KEMENAG (EQURAN API)
 async function openTafsir(key){
 document.getElementById('tafsirOverlay').classList.add('active');
 document.getElementById('tafsirModal').classList.add('open');
@@ -1083,7 +1171,7 @@ document.getElementById('tafsirOverlay').classList.remove('active');
 document.getElementById('tafsirModal').classList.remove('open');
 }
 
-// FUNGSI PENCARIAN AYAT - FIXED SCROLL BUG
+// FUNGSI PENCARIAN AYAT
 function openSearchModal() {
 document.getElementById('searchOverlay').classList.add('active');
 document.getElementById('searchModal').classList.add('open');
